@@ -94,11 +94,23 @@ public class MysterySolver4AB implements MysterySolverInterface4AB
         while (strTok.hasMoreTokens()){
             total.add(Integer.parseInt(strTok.nextToken()));
         }
-        double map = double(total.get(0))/(double)(total.get(1)));
-        System.out.println ("Map Value: " + map);
-        
-
+        String repl = ((double)(total.get(0))/(double)(total.get(1))) + "";
+        repl = repl.substring(2);
+        System.out.println(repl);
+        if(repl.length() < total.get(2)){
+            System.out.println(repl);
+            while(repl.length() != total.get(2)){
+                repl+="0";}
+        }
+        else
+        {
+            System.out.println(repl);
+            repl = repl.substring(0,total.get(2));
+            System.out.println(repl);
+        }
+        return repl;
     }
+
     public String mysteryC(String input)
     {
         StringTokenizer strTok = new StringTokenizer(input);
