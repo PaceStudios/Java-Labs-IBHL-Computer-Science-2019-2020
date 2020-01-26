@@ -17,22 +17,97 @@ public class MysterySolver4AB implements MysterySolverInterface4AB
      */
     public String mysteryPreFix(String input)
     {
-        StringTokenizer strTok = new StringTokenizer(input);
-        /*  Stack<?????> s = new Stack<??????>();
-        Queue<?????> q = new LinkedList<?????>();
-        plus one other Object
-         */     
-        return "";
+        String repl = input;
+        String values = input.replaceAll(" ", "");
+        Stack<Double> Stack = new Stack<Double>(); 
+        for (int j = values.length()-1; j >= 0; j--) { 
+            if (isOperand(values.charAt(j))) 
+            {
+                System.out.println( (double)(values.charAt(j) - 48));
+                Stack.push((double)(values.charAt(j) - 48)); 
+            }
+
+            else 
+            { 
+                double o1 = Stack.peek(); 
+                Stack.pop(); 
+                double o2 = Stack.peek(); 
+                Stack.pop(); 
+
+                switch (values.charAt(j)) { 
+                    case '+': 
+                    Stack.push(o1 + o2); 
+                    break; 
+                    case '-': 
+                    Stack.push(o1 - o2); 
+                    break; 
+                    case '^': 
+                    Stack.push(Math.pow(o1,o2)); 
+                    break; 
+                    case '*': 
+                    Stack.push(o1 * o2); 
+                    break; 
+                    case '%': 
+                    Stack.push(o1 % o2); 
+                    break; 
+                    case '/': 
+                    Stack.push(o1 / o2); 
+                    break; 
+
+                } 
+            } 
+        } 
+        int x = (int) Math.round(Stack.peek());
+        return "" + x; 
     }
+
+    public static Boolean isOperand(char possibleOperand) 
+    { 
+        // If the character is a digit 
+        // then it must be an operand 
+        if (!(possibleOperand >= 48 && possibleOperand <= 57)) 
+        {
+            return false; 
+        }
+        else
+        {
+            return true; 
+        }
+    } 
 
     public String mysteryPostFix(String input)
     {
         StringTokenizer strTok = new StringTokenizer(input);
-        /*  Stack<?????> s = new Stack<??????>();
-        Queue<?????> q = new LinkedList<?????>();
-        plus one other Object
-         */     
-        return "";
+        Stack<Integer> topTom = new Stack<Integer>();
+        String repl = "";
+        while(strTok.hasMoreTokens()){
+            char r = strTok.nextToken().charAt(0);
+            if(Character.isDigit(r)){
+                topTom.push(r-'0');
+            }
+            else
+            {
+                int firstVal = topTom.pop();
+                int secondVal = topTom.pop();
+                switch(r){
+                    case '+':
+                    topTom.push(secondVal + firstVal);
+                    break;
+                    case '-':
+                    topTom.push(secondVal-firstVal);
+                    break;
+                    case'*':
+                    topTom.push(secondVal * firstVal);
+                    break;
+                    case'/':
+                    topTom.push(secondVal/firstVal);
+                    break;
+                }
+            }
+
+        }    
+        return topTom.pop() + "";
+
     }
 
     public String mysteryP(String input)
@@ -91,21 +166,60 @@ public class MysterySolver4AB implements MysterySolverInterface4AB
     {
         StringTokenizer strTok = new StringTokenizer(input);
         List<Integer> total = new ArrayList<Integer>();
-        while (strTok.hasMoreTokens()){
-            total.add(Integer.parseInt(strTok.nextToken()));
-        }
-        double map = double(total.get(0))/(double)(total.get(1)));
-        System.out.println ("Map Value: " + map);
-        
+        String repl = "";
 
+        while (strTok.hasMoreTokens()){
+            int a = Integer.parseInt(strTok.nextToken());
+            System.out.println(a);
+            total.add(a);
+        }
+        repl = ((double)(total.get(0))/(double)(total.get(1))) + "";
+        System.out.println("Repl:" + repl);
+        repl = repl.substring(2);
+        System.out.println(repl);
+        if(repl.length() < total.get(2)){
+            for(int i = 1; i < total.get(2);i++){
+                repl+="0";}
+        }
+        else
+        {
+            repl = repl.substring(0,total.get(2));
+        }
+        System.out.println("Current Value of Repl: " + repl);
+        return repl;
     }
+
     public String mysteryC(String input)
     {
         StringTokenizer strTok = new StringTokenizer(input);
-        /*  Stack<?????> s = new Stack<??????>();
-        Queue<?????> q = new LinkedList<?????>();
-        plus one other Object
-         */     
-        return "";
+        String currentIteration = strTok.nextToken();
+        String ans = "OUTPUT:\n" + currentIteration;
+        int apple = Integer.parseInt(strTok.nextToken());
+        for(int i = 0; i<apple; i++)
+        {
+            currentIteration = findMyButter(currentIteration);
+            ans = ans + "\n"; 
+            ans += currentIteration;
+        }
+
+        return ans;
+    }
+
+    public String findMyButter(String meganFox){
+        StringBuilder result= new StringBuilder();
+        char repeat= meganFox.charAt(0);
+        meganFox+=meganFox.substring(1) + " ";
+        int times= 1;
+
+        for(char actual: meganFox.toCharArray()){
+            if(actual != repeat){
+                result.append(times + "" + repeat);
+                times= 1;
+                repeat= actual;
+            }else{
+                times+= 1;
+            }
+        }
+        return result.toString();
     }
 }
