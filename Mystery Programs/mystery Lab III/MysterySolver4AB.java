@@ -173,19 +173,35 @@ public class MysterySolver4AB implements MysterySolverInterface4AB
             System.out.println(a);
             total.add(a);
         }
+<<<<<<< HEAD
         repl = ((double)(total.get(0))/(double)(total.get(1))) + "";
         System.out.println("Repl:" + repl);
         repl = repl.substring(2);
         System.out.println(repl);
         if(repl.length() < total.get(2)){
             for(int i = 1; i < total.get(2);i++){
+=======
+        String repl = ((double)(total.get(0))/(double)(total.get(1))) + "";
+        repl = repl.substring(2);
+        System.out.println(repl);
+        if(repl.length() < total.get(2)){
+            System.out.println(repl);
+            while(repl.length() != total.get(2)){
+>>>>>>> b3b11d9f9fc9838fb0460494107ba615e6486e84
                 repl+="0";}
         }
         else
         {
+<<<<<<< HEAD
             repl = repl.substring(0,total.get(2));
         }
         System.out.println("Current Value of Repl: " + repl);
+=======
+            System.out.println(repl);
+            repl = repl.substring(0,total.get(2));
+            System.out.println(repl);
+        }
+>>>>>>> b3b11d9f9fc9838fb0460494107ba615e6486e84
         return repl;
     }
 

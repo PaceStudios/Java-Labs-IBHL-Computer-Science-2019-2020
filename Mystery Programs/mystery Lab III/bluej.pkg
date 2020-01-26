@@ -2,10 +2,27 @@
 dependency1.from=StudentABMysterySolverTest
 dependency1.to=MysterySolver4AB
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 package.editor.height=393
 package.editor.width=670
 package.editor.x=151
 package.editor.y=67
+=======
+editor.fx.0.height=739
+editor.fx.0.width=912
+editor.fx.0.x=143
+editor.fx.0.y=49
+objectbench.height=93
+objectbench.width=760
+package.divider.horizontal=0.599476439790576
+package.divider.vertical=0.8
+package.editor.height=393
+package.editor.width=670
+package.editor.x=128
+package.editor.y=79
+package.frame.height=600
+package.frame.width=800
+>>>>>>> b3b11d9f9fc9838fb0460494107ba615e6486e84
 package.numDependencies=1
 package.numTargets=3
 package.showExtends=false
