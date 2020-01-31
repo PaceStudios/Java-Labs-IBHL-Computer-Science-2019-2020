@@ -25,23 +25,22 @@ public class Problem107Page134
      */
     public static String[] findFriday13(int year)
     {
-        String[] ans = {"Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
-        String[] repl = new String[12]; 
-        int k = 5;
-        int day = day_of_the_week(year, 10, 13);
-        System.out.println("In October of " + year + "the 13th of the month will occur on a " + day);
-        for(int i = 1; i <=ans.length;i++){
+        String[] ans = {null, "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
+        List<String> chosenMonths = new ArrayList<String>();
+        for(int i = 1; i <ans.length;i++){
             int currentDay = day_of_the_week(year, i, 13);
             System.out.println("The 13th of " + ans[i] + "Will be on Day " + currentDay);
-            if( k== 5)
-                repl[i] = ans[i];
-            System.out.println("The Month of " + ans[i] + " Qualifies the requisites.");
+            if(currentDay == 5){
+                System.out.println("The Month of " + ans[i] + " Has a Friday the 13th.");
+                chosenMonths.add(ans[i]);}
         }
-        System.out.println("Months that contain a Friday the 13th: ");
+        String repl[] = new String[chosenMonths.size()];
+        for(int i = 0; i < chosenMonths.size(); i++){
+            repl[i] = chosenMonths.get(i);
+        }
+        System.out.println("The finished List: ");
         for(int i = 0; i < repl.length; i++){
-            System.out.println(repl[i] + ",");
-        }
-
+            System.out.println(repl[i] + ",");}
         return repl;
     }
 
