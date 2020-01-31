@@ -29,18 +29,13 @@ public class Problem107Page134
         List<String> chosenMonths = new ArrayList<String>();
         for(int i = 1; i <ans.length;i++){
             int currentDay = day_of_the_week(year, i, 13);
-            System.out.println("The 13th of " + ans[i] + "Will be on Day " + currentDay);
             if(currentDay == 5){
-                System.out.println("The Month of " + ans[i] + " Has a Friday the 13th.");
                 chosenMonths.add(ans[i]);}
         }
         String repl[] = new String[chosenMonths.size()];
         for(int i = 0; i < chosenMonths.size(); i++){
             repl[i] = chosenMonths.get(i);
         }
-        System.out.println("The finished List: ");
-        for(int i = 0; i < repl.length; i++){
-            System.out.println(repl[i] + ",");}
         return repl;
     }
 
