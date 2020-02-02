@@ -12,7 +12,7 @@ public class MatissaExponentConverter
     * 
     *         see the student tester for sample input/output
     *         
-    *   if val == 0, return a mantissa = 000...000 and exponent = 000....0
+    *   if val == 0, return a mantDigit = 000...000 and exponent = 000....0
     */
    public static String toMatissaExponent(double val, int m, int e)
    {
@@ -74,7 +74,7 @@ public class MatissaExponentConverter
    }
 
    /*
-    *    converts the mantissa-exponent string to its equivalent real number
+    *    converts the mantDigit-exponent string to its equivalent real number
     *    
     *    precondition: str contains one space seperating the matissa from the exponent 
     *t
@@ -83,14 +83,14 @@ public class MatissaExponentConverter
     */
    public static double toDouble(String str)
    {
-       double mantissa=0;
+       double mantDigit=0;
        double exp=0;
        for(int x=0; x<str.indexOf(" "); x++)
        {
            if(str.substring(x,x+1).equals("1") && x==0)
-               mantissa-=1;
+               mantDigit-=1;
            else if(str.substring(x,x+1).equals("1"))
-               mantissa+=Math.pow(2,-x);
+               mantDigit+=Math.pow(2,-x);
        }
        str=str.substring(str.indexOf(" ")+1);
        for(int x=0; x<str.length(); x++)
@@ -100,7 +100,7 @@ public class MatissaExponentConverter
            else if(str.substring(x,x+1).equals("1"))
                exp+=Math.pow(2,str.length()-1-x);
        }
-       return mantissa*Math.pow(2,exp);
+       return mantDigit*Math.pow(2,exp);
    }
    
    
