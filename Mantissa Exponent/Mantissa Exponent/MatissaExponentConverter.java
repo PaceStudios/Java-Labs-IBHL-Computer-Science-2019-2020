@@ -75,6 +75,7 @@ public class MatissaExponentConverter
 
     public static boolean allZeros(String val, int sub1){
         return val.substring(0,sub1).contains("1");
+
     }
 
     /*
