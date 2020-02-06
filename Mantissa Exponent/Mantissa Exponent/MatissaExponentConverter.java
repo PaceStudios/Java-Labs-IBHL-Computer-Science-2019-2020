@@ -62,19 +62,41 @@ public class MatissaExponentConverter
          */
         moveableValue = new BigDecimal(ans);
         System.out.println("New Moveable Value: " + moveableValue);
-        int expo = 4;
-        moveableValue = moveableValue.movePointLeft(expo);
+        int expo = 0;
 
-        ans = moveableValue + ""; 
-    
-        System.out.println("Moved Decimal Point is:\t"+moveableValue);
         // Need to figure out a way to substring through the new values and try to figure out how to count how many 0s exist
-        
-        return ans;
-    }
+        if(val > 1){
+            moveableValue = moveableValue.movePointLeft(wholeNumber.length());
+            expo = wholeNumber.length();
+            System.out.println("Moved Value:\t"+moveableValue);
+            exp = Integer.toBinaryString(expo);
+            System.out.println("Converted Exponent = " + exp);
+        }
+        else
+        if(val < 1 && val > 0){
+            int marker = 0;
+            char c = rightSide.charAt(marker);
+            expo = 0;
+            System.out.println("The value directly right of the decimal is:" + c);
+            while(c != '1' && marker < rightSide.length()){
+                System.out.println("Current Exponent:\t"+expo);
+                
+                System.out.println("Current Char:\t"+c);
+                marker++;
+                c = ans.charAt(marker);
+                expo--;
+                System.out.println("New Char:\t"+c);
+            }
+            expo+= 1;
+            moveableValue = moveableValue.movePointRight(expo);
+            System.out.println("Moved Value: " + moveableValue);
+            exp = Integer.toBinaryString(expo);
+            System.out.println("Exponent is\t" +exp);
+        }
+        else
+        {}
 
-    public static boolean allZeros(String val, int sub1){
-        return val.substring(0,sub1).contains("1");
+        return ans;
 
     }
 
