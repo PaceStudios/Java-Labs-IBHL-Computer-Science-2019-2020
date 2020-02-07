@@ -17,6 +17,45 @@ public class MatissaExponentConverter
      */
     public static String toMatissaExponent(double val, int m, int e)
     {
+        String built = convertToBinary(val, m, e);
+        System.out.println("A");
+        System.out.println(built);
+        String mantissa = "";
+        String exp = "";
+        int i = 0;
+        while(built.charAt(i)!= ' ' && i < built.length()){
+            mantissa+= built.substring(i,i+1);
+            i++;
+        }
+        System.out.println("B");
+        System.out.println("Mant:\t"+mantissa);
+        exp = built.substring(mantissa.length()+1, built.length());
+        System.out.println("Exp:\t"+exp);
+        while(mantissa.length()!= m){
+            if(val > 1){
+                mantissa = "0" + mantissa;}
+            else
+            {
+                mantissa = "1" + mantissa;
+            }
+
+        }
+        System.out.println("C");
+        System.out.println("Mantissa =\t"+mantissa);
+        while(exp.length()!= m){
+            if(val > 1){
+                exp = "0" + exp;}
+            else
+            {
+                exp = "1" + exp;
+            }
+        }
+        System.out.println("Exp:\t" +exp);
+        System.out.println("Mantissa and Exponent :\t"+mantissa+" "+exp);
+        return mantissa + " " + exp;
+    }
+
+    public static String convertToBinary(double val, int m, int e){
         String ans = val + "";
         long wholepart = (long) val;
         double fraction = Math.abs((val - (wholepart)));
@@ -26,45 +65,14 @@ public class MatissaExponentConverter
         String mantissa = "";
         String exp = "";
         BigDecimal moveableValue;
-        if(val == 0){
-
-            for(int i = 0; i < m; i++){
-                mantissa+= "0";}
-            for(int i = 0; i < e; i++){
-                exp+="0";}
-            return mantissa + " " + exp;
-        }
-        if(val > 0){
-            System.out.println("Value is greater than 0"); 
-        }
-        else{
-            System.out.println("Value is less than 0");
-        }
-
-        while(fraction != 0){
-            if((fraction - Math.pow(2,factor)) < 0){
-                System.out.println(Math.pow(2,factor) + "" + "\t Was too big");
-                rightSide+="0";}
-            else{
-                System.out.println(Math.pow(2,factor) + "" + "\t Either fit, or was smaller than target.");
-                rightSide+="1";
-                fraction -= Math.pow(2,factor);
-            }
-            factor--;
-        }
         rightSide = rightSide;
         System.out.println("The Binary Conversion of the Fraction\t"+fraction+"Is now converted to the Binary Rep:\t"+rightSide);
         String wholeNumber = Long.toBinaryString(wholepart);
         ans = wholeNumber + "." + rightSide;
         System.out.println(ans);
-        /*
-         * Next Part is dedicated to moving the decimal and find the exponent 
-         */
         moveableValue = new BigDecimal(ans);
         System.out.println("New Moveable Value: " + moveableValue);
         int expo = 0;
-
-        // Need to figure out a way to substring through the new values and try to figure out how to count how many 0s exist
         if(val > 1){
             moveableValue = moveableValue.movePointLeft(wholeNumber.length());
             expo = wholeNumber.length();
@@ -80,7 +88,7 @@ public class MatissaExponentConverter
             System.out.println("The value directly right of the decimal is:" + c);
             while(c != '1' && marker < rightSide.length()){
                 System.out.println("Current Exponent:\t"+expo);
-                
+
                 System.out.println("Current Char:\t"+c);
                 marker++;
                 c = ans.charAt(marker);
@@ -95,9 +103,17 @@ public class MatissaExponentConverter
         }
         else
         {}
-
+        mantissa = moveableValue + "";
+        int i = 0;
+        while(mantissa.charAt(i) != '.'){
+            i++;
+        }
+        mantissa = mantissa.substring(0,i) + mantissa.substring(i);
+        ans = mantissa+" "+exp;
+        if(mantissa.length() > m){
+            return "np";}
+        if(exp.length() > e){return "np";}
         return ans;
-
     }
 
     /*
