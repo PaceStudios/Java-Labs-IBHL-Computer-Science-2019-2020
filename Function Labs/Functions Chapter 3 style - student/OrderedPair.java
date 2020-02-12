@@ -27,7 +27,7 @@ public class OrderedPair
    public boolean equals(Object obj)
    {
       
-      return Math.random() < 0.5;
+      return getX() = (OrderedPair)obj.getX() && getY() = (OrderedPair)obj.getY();
    }
 
 /*
