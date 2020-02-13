@@ -29,18 +29,12 @@ public class FunctionsChapter3Style
         }
         for(String e : co){
             codomain.add(e);}
-        System.out.println("Domain: ");
-        for(String e: domain){
-            System.out.println(e + ",");}
-        System.out.println("Codomain: ");
-        for(String e: codomain){
-            System.out.println(e + ",");}
-
+      
     }
 
     public FunctionsChapter3Style(Set<String> d, Set<String> co, Set<OrderedPair> r)
     {
-        /*   build your own constructor   */
+        relation = new ArrayList<Ordered
     }
 
     /*
