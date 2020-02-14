@@ -2,8 +2,8 @@ import java.util.*;
 import java.lang.Math;
 /**
  *
- * @author  
- * @version (a version number or a date)
+ * @author  John C. Pace
+ * @version (02/13/20)
  */
 public class OrderedPair
 {
@@ -26,11 +26,12 @@ public class OrderedPair
      */
     public boolean equals(Object obj)
     {
-        OrderedPair comp = (OrderedPair)obj;
-        System.out.println("This Object " + this.toString());
-        System.out.println("Compared" + comp.toString());
-        return ((this.getX() == comp.getX()) && (this.getY() == comp.getY()));
-
+        OrderedPair temp = (OrderedPair) (obj);
+        if (temp.getX()==x && temp.getY()==y)
+        {
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -40,7 +41,13 @@ public class OrderedPair
      */
     public int hashCode()
     {
-        return (int)(Math.random() * 99999);
+        int part1, part2;
+        char p1, p2;
+        p1 = x.charAt(0);
+        p2 = y.charAt(0);
+        part1 = Character.getNumericValue(p1);
+        part2 = Character.getNumericValue(p2);
+        return part1 + part2;
     }
 
     /*
