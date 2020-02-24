@@ -32,12 +32,12 @@ public class FunctionsChapter3StylePart2
 
     public int getNumRows()
     {
-        return -1;
+        return relationMatrix.length;
     }
 
     public int getNumCols()
     {
-        return -1;
+        return relationMatrix[0].length;
     }
 
     /*
@@ -64,7 +64,15 @@ public class FunctionsChapter3StylePart2
      */
     public int getSize()
     {
-        return -1;
+        int count = 0;
+        for(int i = 0; i < relationMatrix.length; i ++){
+            for(int j = 0; j <relationMatrix[i].length; j++){
+                if(relationMatrix[j][i] == 1){
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     /*
@@ -78,7 +86,18 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isFunction()
     {
-        return Math.random() < 0.5;
+        int count = 0;
+        for(int i = 0; i < relationMatrix.length; i ++){
+            count = 0;
+            for(int j = 0; j <relationMatrix[i].length; j++){
+                if(relationMatrix[i][j] == 1){
+                    count++;
+                }
+            }
+            if(count > 1){
+                return false;}
+        }
+        return true;
     }
 
     /* 
@@ -93,7 +112,18 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isOneToOne()   // column sum is one for every column
     {
-        return Math.random() < 0.5;
+        int count = 0;
+        for(int i = 0; i < relationMatrix.length; i ++){
+            count = 0;
+            for(int j = 0; j <relationMatrix[i].length; j++){
+                if(relationMatrix[i][j] == 1){
+                    count++;
+                }
+            }
+            if(count != 1){
+                return false;}
+        }
+        return true;
     }
 
     /*
@@ -108,7 +138,18 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isOnTo()    // column sum > 0 for all columns
     {
-        return Math.random() < 0.5;
+        int count = 0;
+        for(int i = 0; i < relationMatrix.length; i ++){
+            count = 0;
+            for(int j = 0; j <relationMatrix[i].length; j++){
+                if(relationMatrix[j][i] == 1){
+                    count++;
+                }
+            }
+            if(count ==0){
+                return false;}
+        }
+        return true;
     }
 
     /*
@@ -121,7 +162,7 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isBijective()
     {
-        return Math.random() < 0.5;
+        return isOnTo() && isOneToOne();
     }
 
     /*
