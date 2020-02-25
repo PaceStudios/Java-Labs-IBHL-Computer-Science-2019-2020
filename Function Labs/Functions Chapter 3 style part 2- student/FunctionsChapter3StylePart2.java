@@ -12,8 +12,8 @@ import java.util.*;
 import java.lang.Math;
 /**
  *
- * @author  
- * @version (a version number or a date)
+ * @John C. Pace   
+ * @02/25/2020
  */
 public class FunctionsChapter3StylePart2
 {
@@ -162,7 +162,7 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isBijective()
     {
-        return isOnTo() && isOneToOne();
+        return isOnTo() && isOneToOne() && isFunction();
     }
 
     /*
@@ -193,7 +193,13 @@ public class FunctionsChapter3StylePart2
      */
     public int[][] getInverse()    // not the inverse of the matrix, but function inverse!!!!!
     {
-        return new int[7][13];
+        int[][] inverse = new int[relationMatrix.length][relationMatrix[0].length];
+        for(int i = 0; i < relationMatrix.length; i++){
+            for(int j = 0; i < relationMatrix[i].length; j++){
+                inverse[i][j] = relationMatrix[j][i];
+            }
+        }
+        return inverse;
     }
 
     /*
@@ -206,7 +212,14 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isReflexive()
     {
-        return Math.random() < 0.5;
+        if(relationMatrix.length != relationMatrix[0].length)
+            return false;
+        for(int i = 0; i < relationMatrix.length; i++){
+            if(relationMatrix[i][i] != 1){
+                return false;
+            }
+        }
+        return true;
     }
 
     /*
@@ -218,7 +231,13 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isSymmetric()
     {
-        return Math.random() < 0.5;
+        for(int i = 0; i < relationMatrix.length; i++){
+            for(int j = 0; j < relationMatrix[i].length; j++){
+                if(relationMatrix[i][j] != relationMatrix[j][i])
+                    return false;
+            }
+        }
+        return true;
     }
 
     /*
@@ -230,7 +249,14 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isAntiSymmetric()
     {
-        return Math.random() < 0.5;
+        for(int i = 0; i < relationMatrix.length; i ++){
+            for(int k = 0; k < relationMatrix[i].length; k++){
+                System.out.println(relationMatrix[i][k] + "");
+                if(relationMatrix[i][k] == 1 && relationMatrix[k][i] == 1)
+                    return false;
+            }
+        }
+        return false;
     }
 
     /*
@@ -242,7 +268,18 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isTransitive()
     {
-        return Math.random() < 0.5;
+        Matrix trans = new Matrix();
+        int[][]squaredMatrix = new int[relationMatrix.length][relationMatrix[0].length];
+        squaredMatrix = trans.product(relationMatrix, relationMatrix);
+        for(int i = 0; i < relationMatrix.length; i++){
+            for(int j = 0; j < relationMatrix[i].length; j++){
+                if(squaredMatrix[i][j] > 0)
+                    squaredMatrix[i][j] = 1;
+                if(squaredMatrix[i][j] != relationMatrix[i][j])
+                    return false;
+            }
+        }
+        return true;
     }
 
     /*
@@ -251,7 +288,7 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isEquivalenceRelation()
     {
-        return Math.random() < 0.5;
+        return (isSymmetric() && isTransitive() && isReflexive());
     }
 
     /* 
@@ -260,7 +297,7 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isPartiallyOrder()
     {
-        return Math.random() < 0.5;
+        return (isAntiSymmetric() && isTransitive() && isReflexive());
     }
 
     /* 
@@ -270,6 +307,10 @@ public class FunctionsChapter3StylePart2
      */
     public String toString()
     {
-        return "";
+        String str = "";
+        for(int i = 0; i < relationMatrix.length-1; i++){
+            for(int a = 0; a<relationMatrix[0].length-1;
+        }
+        return str;
     }
 }
