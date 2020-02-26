@@ -66,10 +66,8 @@ public class FunctionsChapter3StylePart2
     {
         int count = 0;
         for(int i = 0; i < relationMatrix.length; i ++){
-            for(int j = 0; j <relationMatrix[i].length; j++){
-                if(relationMatrix[j][i] == 1){
-                    count++;
-                }
+            for(int j = 0; j <relationMatrix[0].length; j++){
+                count+= relationMatrix[i][j];
             }
         }
         return count;
@@ -193,10 +191,13 @@ public class FunctionsChapter3StylePart2
      */
     public int[][] getInverse()    // not the inverse of the matrix, but function inverse!!!!!
     {
-        int[][] inverse = new int[relationMatrix.length][relationMatrix[0].length];
-        for(int i = 0; i < relationMatrix.length; i++){
-            for(int j = 0; i < relationMatrix[i].length; j++){
-                inverse[i][j] = relationMatrix[j][i];
+        int[][] inverse = new int[relationMatrix[0].length][relationMatrix.length];
+        System.out.println(Arrays.deepToString(relationMatrix));
+        System.out.println(Arrays.deepToString(inverse));
+        for(int i = 0; i < relationMatrix[0].length; i++){
+            for(int j = 0; i < relationMatrix.length; j++){
+                inverse[i][j] = relationMatrix[i][j];
+
             }
         }
         return inverse;
@@ -256,7 +257,7 @@ public class FunctionsChapter3StylePart2
                     return false;
             }
         }
-        return false;
+        return true;
     }
 
     /*
@@ -307,10 +308,6 @@ public class FunctionsChapter3StylePart2
      */
     public String toString()
     {
-        String str = "";
-        for(int i = 0; i < relationMatrix.length-1; i++){
-            for(int a = 0; a<relationMatrix[0].length-1;
-        }
-        return str;
+        return Arrays.deepToString(relationMatrix);
     }
 }
