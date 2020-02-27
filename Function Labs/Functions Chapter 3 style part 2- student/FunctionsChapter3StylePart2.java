@@ -137,12 +137,10 @@ public class FunctionsChapter3StylePart2
     public boolean isOnTo()    // column sum > 0 for all columns
     {
         int count = 0;
-        for(int i = 0; i < relationMatrix.length; i ++){
+        for(int i = 0; i < relationMatrix[0].length; i ++){
             count = 0;
             for(int j = 0; j <relationMatrix[i].length; j++){
-                if(relationMatrix[j][i] == 1){
-                    count++;
-                }
+                count+= relationMatrix[i][j];
             }
             if(count ==0){
                 return false;}
