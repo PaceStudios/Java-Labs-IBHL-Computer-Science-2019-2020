@@ -4,8 +4,8 @@
  * 
  * need Matrix operations
  * 
- * @author Don Allen
- * @version March 2011
+ * @author John C. Pace
+ * @version 03/02/2020
  */
 import java.util.*;
 public class Matrix

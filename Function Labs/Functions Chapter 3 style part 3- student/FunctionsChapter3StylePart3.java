@@ -43,13 +43,19 @@ public class FunctionsChapter3StylePart3
      */
     public static int[][] makeSymmetric(int[][] m)
     {  
-        int[][] symMat = m;
-        for(int i = 0; i < symMat.length; i++){
-            for(int k = 0; k < symMat[0].length;k++){
-                symMat[i][k] = symMat[k][i];
+        int[][] temp = new int[m.length][m[0].length];
+        for(int r=0; r<m.length; r++){
+            for(int c=0; c<m[0].length; c++){
+                temp[r][c] = m[r][c];
             }
         }
-        return symMat;
+        for(int r=0; r<m.length; r++){
+            for(int c=0; c<m[0].length; c++){
+                if(temp[r][c] == 0 && temp[c][r] != 0)
+                    temp[r][c] = 1;
+            }
+        }
+        return temp;
     }
 
     /*

@@ -17,11 +17,12 @@ public class MatrixPart2
     {
         for(int i = 0; i < m.length; i ++){
             for(int j = 0; j < m[0].length; j++){
-                if(m[i][j] != 0){
-                    System.out.println("Current Value for M Array:\t" + m[i][j] + "\t" + "Current Value for N Array:\t" + n[i][j]);
-                    if(n[i][j] == 0)
-                        return false;
-                }
+                if(m[i][j] != 0 && n[i][j] == 0){
+                    return false;
+
+                }                
+                else if(m[i][j] == 0 && n[i][j] != 0){
+                return false;}
             }
         }
         return true;
