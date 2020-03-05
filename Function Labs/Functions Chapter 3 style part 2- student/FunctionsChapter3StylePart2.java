@@ -92,7 +92,7 @@ public class FunctionsChapter3StylePart2
                     count++;
                 }
             }
-            if(count > 1){
+            if(count != 1){
                 return false;}
         }
         return true;
@@ -110,13 +110,12 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isOneToOne()   // column sum is one for every column
     {
+        if (!isFunction()) return false;
         int count = 0;
         for(int i = 0; i < relationMatrix.length; i ++){
             count = 0;
             for(int j = 0; j <relationMatrix[i].length; j++){
-                if(relationMatrix[i][j] == 1){
-                    count++;
-                }
+                count += relationMatrix[j][i];
             }
             if(count != 1){
                 return false;}
@@ -136,14 +135,13 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isOnTo()    // column sum > 0 for all columns
     {
-        int count = 0;
-        for(int i = 0; i < relationMatrix[0].length; i ++){
-            count = 0;
-            for(int j = 0; j <relationMatrix[i].length; j++){
-                count+= relationMatrix[i][j];
+        if (!isFunction()) return false;
+        for(int j = 0; j < relationMatrix[0].length; j++){  
+            int count = 0;
+            for(int i = 0; i < relationMatrix.length; i++){
+                count += relationMatrix[i][j];
             }
-            if(count ==0){
-                return false;}
+            if(!(count > 0)) return false;
         }
         return true;
     }
@@ -158,7 +156,7 @@ public class FunctionsChapter3StylePart2
      */
     public boolean isBijective()
     {
-        return isOnTo() && isOneToOne() && isFunction();
+        return (isFunction() && isOneToOne() && isOnTo());
     }
 
     /*
@@ -174,10 +172,20 @@ public class FunctionsChapter3StylePart2
      */
     public FunctionsChapter3StylePart2 composition(int[][] comp)
     {
-        int[][] cTemp = new int[11][3];
-        FunctionsChapter3StylePart2 ans = new FunctionsChapter3StylePart2(cTemp);
+        int[][] a = new int[relationMatrix.length][comp[0].length];
 
-        return ans;
+        for(int i = 0; i < relationMatrix.length; i++){
+            for(int j = 0; j < relationMatrix[0].length; j++){
+                if(relationMatrix[i][j] > 0){
+                    for(int k = 0; k < comp[0].length; k++){
+                        if(comp[j][k] > 0){
+                            a[i][k] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        return new FunctionsChapter3StylePart2(a);
     }
 
     /*
@@ -189,13 +197,12 @@ public class FunctionsChapter3StylePart2
      */
     public int[][] getInverse()    // not the inverse of the matrix, but function inverse!!!!!
     {
-        int[][] inverse = new int[relationMatrix[0].length][relationMatrix.length];
+        int[][] inverse = new int[relationMatrix.length][relationMatrix[0].length];
         System.out.println(Arrays.deepToString(relationMatrix));
         System.out.println(Arrays.deepToString(inverse));
-        for(int i = 0; i < relationMatrix[0].length; i++){
-            for(int j = 0; i < relationMatrix.length; j++){
-                inverse[i][j] = relationMatrix[i][j];
-
+        for(int i = 0; i < inverse.length; i++){
+            for(int k = 0; k < inverse[0].length; k++){
+                inverse[k][i] = relationMatrix[i][k];
             }
         }
         return inverse;
@@ -251,7 +258,7 @@ public class FunctionsChapter3StylePart2
         for(int i = 0; i < relationMatrix.length; i ++){
             for(int k = 0; k < relationMatrix[i].length; k++){
                 System.out.println(relationMatrix[i][k] + "");
-                if(relationMatrix[i][k] == 1 && relationMatrix[k][i] == 1)
+                if(i != k && (relationMatrix[i][k] > 0 && relationMatrix[k][i] > 0))
                     return false;
             }
         }
